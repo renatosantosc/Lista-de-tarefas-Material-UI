@@ -1,66 +1,107 @@
 import '@fontsource/roboto/500.css';
-import { Paper, Grid, Stack, TextField } from '@mui/material'
-import Button from '@mui/material/Button'
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { Grid, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Alert, Button, Collapse, Box } from '@mui/material'
 import { useState } from 'react';
-import TaskList from './TaskList';
+import TaskGrid from './TaskGrid';
 
-export default function Task(){
+export default function Task(props){
 
     const [task,  setTask] = useState(null)
-    const [list, setlist] = useState([])
-
+    const [title, setTitle] = useState(null)
+    const [list, setList] = useState([])
+    const [errorTitle, setErrorTitle] = useState(false)
+    const [errorTask, setErrorTask] = useState(false)
+    const [success, setSuccess] = useState(false)
+    const bgs = ['#9f97ca', '#5d5b79', '#e4b6ad', '#e8e1c1', '#98fef9', '#c24862', '#6394ac', '#74a49f', '#cf9889', '#926277', '#785276', '#7897d6',
+                 '#43588d', '#0897ff', '#1a657b', '#da5ab6', '#fa57a3', '#716c8b', '#75285b', '#0e4b9b']
+   
+    const bg = () => {return bgs[Math.floor(Math.random() * bgs.length)]}
     const handleChange = e =>{ setTask(e.target.value) }
-
+    const handleTitle = e => { setTitle(e.target.value) }
     const idTask = () => { return Math.floor(Math.random() * 3000) }
 
     const addTask = () => {
-
-      if(task.trim().length > 0){
-        setlist( [...list, {name: task, key: idTask()}] )
-        setTask('')
+      if(title.trim().length > 0){
+        setErrorTitle(false)
+        if(task.trim().length > 0){
+          setList( [...list, {name: task, key: idTask(), theme: bg(), title: title}] )
+          setTask('')
+          setTitle('')
+          props.setOpen(false)
+          setErrorTask(false)
+          setSuccess(true)
+        }
+        else{ setErrorTask(true) }
       }
-      else if(task.trim().length <= 0){
-        console.log('sem task')
-      }
+      else{ setErrorTitle(true) }
     }
+    const handleClose = () =>{ props.setOpen(false) }
 
     return(
         <>
+        <Grid item xs={12} >
+          <Grid container justifyContent={'center'} >
+            <Box sx={{width: '50%'}}>
+              <Collapse in={success}>
+                <Alert onClose={success} severity='success' sx={{width: '90%'}} action={
+                  <Button onClick={()=>{ setSuccess(false) }}> X </Button> }>
+                  Salvo com sucesso
+                </Alert>
+              </Collapse>
+            </Box>
+          </Grid>
+        </Grid>
         <Grid item xs={12}>
             <Grid container justifyContent={'center'}>
-              <Paper elevation={10} sx={{width: '50%', padding: 2, marginTop: 2, borderRadius: 2}}>
-                <Stack width={'100%'} spacing={2} direction='row' alignItems={'center'}>
-                  <TextField 
-                  type='text' 
-                  label='Tarefa' 
-                  variant='standard' 
-                  size='normal' 
-                  fullWidth 
-                  placeholder='Digite a sua tarefa'
-                  name='task'
-                  value={task}
-                  onChange={handleChange}
-                  onKeyDown={(e)=>{
-                    if(e.key === 'Enter'){
-                      addTask()
-                    }
-                  }}  />
+                <Dialog open={props.open} onClose={handleClose} sx={{padding: 2}}>
+                  <DialogTitle textAlign={'center'}>Crie sua tarefa</DialogTitle>
+                  <DialogContent>
 
-                  <Button 
-                  variant='contained' 
-                  size='large' 
-                  endIcon={ <SaveAltIcon fontSize='inherit' /> }
-                  onClick={addTask}
-                  >Salvar</Button>
+                  <TextField sx={{marginBottom: 1}}
+                    type='text' 
+                    label='Título' 
+                    variant='standard' 
+                    required
+                    size='normal' 
+                    fullWidth 
+                    placeholder='Digite o título da tarefa'
+                    name='title'
+                    value={title}
+                    onChange={handleTitle}
+                    helperText={errorTitle ? 'Campo obrigatório' : ''}
+                    error={errorTitle}
+                    autoComplete='off'
+                      />
 
-                </Stack>
-              </Paper>
+                    <TextField
+                    type='text' 
+                    label='Tarefa' 
+                    variant='standard' 
+                    required
+                    size='normal' 
+                    fullWidth 
+                    placeholder='Digite a sua tarefa'
+                    name='task'
+                    value={task}
+                    onChange={handleChange}
+                    helperText={errorTask ? 'Campo obrigatório' : ''}
+                    error={errorTask}
+                    autoComplete='off'
+                      />
+                  </DialogContent>
+
+                  <DialogActions sx={{marginBottom: 1}}>
+                    <Button 
+                    variant='contained' 
+                    size='normal' 
+                    onClick={addTask}
+                    >Salvar</Button>
+
+                    <Button onClick={handleClose}>Fechar</Button>
+                  </DialogActions>
+                </Dialog>
             </Grid>
           </Grid>
-          {list.length > 0 ? 
-          <TaskList list={list} setList={setlist} /> : ''
-          }
+          <TaskGrid list={list} setList={setList} />
         </>
     )
 }
