@@ -6,8 +6,24 @@ import { Paper, Typography, Grid, IconButton, Card, CardContent, CardHeader, Car
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from 'react'
+import View from './View';
+import Delete from './Delete';
+import Edit from './Edit';
 
 export default function TaskGrid(props){
+
+    const [open, setOpen] = useState(false)
+    const [editTask, setEditTask] = useState(false)
+    const [del, setDel] = useState(false)
+    const [nameUpdate, setNameUpdate] = useState()
+    const [userData, setUserData] = useState({
+        id: '',
+        name: '',
+        theme: '',
+        title: ''
+    })
+
     return(
         <Grid item xs={12} direction={'row'} marginBottom={5} >
             <Grid container spacing={4} marginTop={1}
@@ -15,7 +31,7 @@ export default function TaskGrid(props){
             '&::-webkit-scrollbar':{width: '5px'}, '&::-webkit-scrollbar-thumb':{backgroundColor: 'transparent', borderRadius: '20px'}, '&::-webkit-scrollbar-track':{backgroundColor: 'trasnparent'}}}>
                 {props.list.map( itemObj =>{
                     return(
-                        <Grid item lg={4} md={6} sm={6} xs={12}>
+                        <Grid item lg={4} md={6} sm={6} xs={12} key={itemObj.key}>
                             <Paper elevation={10} wid sx={{width: '100%'}}>
                                 <Card sx={{backgroundColor: itemObj.theme}}>
                                     <CardHeader title={<Typography fontSize={24} noWrap>{itemObj.title}</Typography>}  sx={{display: 'block', textAlign: 'center', backgroundColor: 'black', opacity: '0.4', color: 'white'}} />
@@ -25,12 +41,24 @@ export default function TaskGrid(props){
                                     <CardActions disableSpacing >
                                         <Grid container>
                                             <Grid item xs={4}>
-                                                <IconButton title='Visualizar'> <VisibilityIcon /> </IconButton>
+                                                <IconButton title='Visualizar' onClick={()=>{
+                                                    setOpen(true)
+                                                    setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
+                                                }}> 
+                                                <VisibilityIcon /> </IconButton>
                                             </Grid>
 
                                             <Grid item xs={8} textAlign={'end'}>
-                                                <IconButton title='Editar'> <EditIcon   /> </IconButton>
-                                                <IconButton title='Deletar'> <DeleteIcon  /> </IconButton>
+                                                <IconButton title='Editar' onClick={()=>{
+                                                    setEditTask(true)
+                                                    setNameUpdate(itemObj.name)
+                                                    setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
+                                                }}> <EditIcon   /> </IconButton>
+
+                                                <IconButton title='Deletar' onClick={()=>{
+                                                    setDel(true)
+                                                    setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
+                                                }}> <DeleteIcon  /> </IconButton>
                                             </Grid>
                                         </Grid>
                         
@@ -41,6 +69,9 @@ export default function TaskGrid(props){
                     )
                 })}
             </Grid>
+            <View open={open} setOpen={setOpen} userData={userData} />
+            <Edit editTask={editTask} setEditTask={setEditTask} nameUpdate={nameUpdate} setNameUpdate={setNameUpdate} userData={userData} setUserData={setUserData} setList={props.setList} list={props.list} />
+            <Delete del={del} setDel={setDel} setList={props.setList} list={props.list} userData={userData} />
         </Grid>
         
     )
