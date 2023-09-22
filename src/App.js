@@ -38,7 +38,7 @@ function App() {
               <Grid item lg={4} md={4} sm={4} xs={4} textAlign={'center'}>
                 <Typography fontSize={16} fontWeight={'bold'} fontFamily={'verdana'} sx={{color: mode ? '#262d35' : '#e3eae9'}} >Lembre de suas tarefas</Typography>
               </Grid>
-              {toggle < 560 ? <Toggle mode={mode} /> :
+              {toggle < 560 ? <Toggle mode={mode} setMode={setMode} /> :
               <Grid item lg={4} md={4} sm={4} xs={4} textAlign={'end'}>
                 <Link href='https://github.com/renatosantosc' underline='none' target='_blank' rel='noopener'>
                   <IconButton> <GitHubIcon sx={{color: mode ? '#262d35' : '#e3eae9'}} /> </IconButton>
