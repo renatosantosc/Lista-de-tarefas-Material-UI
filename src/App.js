@@ -28,7 +28,7 @@ function App() {
     <Box sx={{width: '100vw', heidht: '100vh', backgroundColor: mode ? '#e2e2e2' : '#262d35'}}>
       <Container maxWidth='lg' sx={{backgroundColor: 'transparent', justifyContent: 'center', height: '100vh', overflowY: 'hidden'}}>
         
-        <Box width={'100%'} sx={{height: 50}} >
+        <Box width={'100%'}  >
           <Paper elevation={10} sx={{backgroundColor: 'transparent', padding: 1}} >
             <Grid container spacing={2} alignItems={'center'}>
               <Grid item lg={4} md={4} sm={4} xs={4} >
@@ -53,14 +53,14 @@ function App() {
           </Paper>
         </Box>
 
-        <Grid container spacing={8}>
+        <Grid container>
           <Grid item xs={12}>
-            <Grid container justifyContent={'center'} marginTop={5} marginBottom={3}>
+            <Grid container justifyContent={'center'} marginTop={3} marginBottom={2} >
               <Button variant='contained' startIcon={ <CreateIcon fontSize='inherit' /> } onClick={handleOpen}>Escrever</Button>
             </Grid>
           </Grid>
         </Grid>
-        <Task open={open} setOpen={setOpen} />
+        <Task open={open} setOpen={setOpen} toggle={toggle} />
       </Container>
     </ Box>
   );
