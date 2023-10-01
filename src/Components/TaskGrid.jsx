@@ -25,53 +25,56 @@ export default function TaskGrid(props){
     })
 
     return(
-        <Grid item xs={12} direction={'row'} marginBottom={5} >
-            <Grid container spacing={4} marginTop={1}
-            sx={{height: 470, overflowX: 'hidden', overflowY: 'scroll', '&:hover':{'&::-webkit-scrollbar-thumb':{backgroundColor: 'gray'}},
-            '&::-webkit-scrollbar':{width: '5px'}, '&::-webkit-scrollbar-thumb':{backgroundColor: 'transparent', borderRadius: '20px'}, '&::-webkit-scrollbar-track':{backgroundColor: 'trasnparent'}}}>
-                {props.list.map( itemObj =>{
-                    return(
-                        <Grid item lg={4} md={6} sm={6} xs={12} key={itemObj.key}>
-                            <Paper elevation={10} wid sx={{width: '100%'}}>
-                                <Card sx={{backgroundColor: itemObj.theme}}>
-                                    <CardHeader title={<Typography fontSize={24} noWrap>{itemObj.title}</Typography>}  sx={{display: 'block', textAlign: 'center', backgroundColor: 'black', opacity: '0.4', color: 'white'}} />
-                                    <CardContent>
-                                        <Typography textAlign={'center'} noWrap>{itemObj.name}</Typography>
-                                    </CardContent>
-                                    <CardActions disableSpacing >
-                                        <Grid container>
-                                            <Grid item xs={4}>
-                                                <IconButton title='Visualizar' onClick={()=>{
-                                                    setOpen(true)
-                                                    setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
-                                                }}> 
-                                                <VisibilityIcon /> </IconButton>
-                                            </Grid>
+        <Grid container>
+            <Grid item xs={12} direction={'row'} >
+                <Grid container spacing={2} height={props.toggle <= 535 ? 470 : 490}
+                sx={{overflowX: 'hidden', overflowY: 'scroll', '&:hover':{'&::-webkit-scrollbar-thumb':{backgroundColor: 'gray'}},
+                '&::-webkit-scrollbar':{width: '5px'}, '&::-webkit-scrollbar-thumb':{backgroundColor: 'transparent', borderRadius: '20px'}, '&::-webkit-scrollbar-track':{backgroundColor: 'trasnparent'}}}>
+                    {props.list.map( itemObj =>{
+                        return(
+                            <Grid item lg={4} md={4} sm={6} xs={props.toggle <= 535 ? 12 : 6} key={itemObj.key} >
+                                <Paper elevation={10} sx={{width: '100%', marginBottom: '15px'}}>
+                                    <Card sx={{backgroundColor: itemObj.theme}}>
+                                        <CardHeader title={<Typography fontSize={24} noWrap>{itemObj.title}</Typography>}  sx={{display: 'block', textAlign: 'center', backgroundColor: 'black', opacity: '0.4', color: 'white'}} />
+                                        <CardContent>
+                                            <Typography textAlign={'center'} noWrap>{itemObj.name}</Typography>
+                                        </CardContent>
+                                        <CardActions disableSpacing >
+                                            <Grid container>
+                                                <Grid item xs={4}>
+                                                    <IconButton title='Visualizar' onClick={()=>{
+                                                        setOpen(true)
+                                                        setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
+                                                    }}> 
+                                                    <VisibilityIcon /> </IconButton>
+                                                </Grid>
 
-                                            <Grid item xs={8} textAlign={'end'}>
-                                                <IconButton title='Editar' onClick={()=>{
-                                                    setEditTask(true)
-                                                    setNameUpdate(itemObj.name)
-                                                    setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
-                                                }}> <EditIcon   /> </IconButton>
+                                                <Grid item xs={8} textAlign={'end'}>
+                                                    <IconButton title='Editar' onClick={()=>{
+                                                        setEditTask(true)
+                                                        setNameUpdate(itemObj.name)
+                                                        setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
+                                                    }}> <EditIcon   /> </IconButton>
 
-                                                <IconButton title='Deletar' onClick={()=>{
-                                                    setDel(true)
-                                                    setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
-                                                }}> <DeleteIcon  /> </IconButton>
+                                                    <IconButton title='Deletar' onClick={()=>{
+                                                        setDel(true)
+                                                        setUserData({id: itemObj.key, name: itemObj.name, title: itemObj.title, theme: itemObj.theme})
+                                                    }}> <DeleteIcon  /> </IconButton>
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
+                            
+                                        </CardActions>
+                                    </Card>
+                                </Paper>
+                            </Grid>
                         
-                                    </CardActions>
-                                </Card>
-                            </Paper>
-                        </Grid>
-                    )
-                })}
+                        )
+                    })}
+                </Grid>
+                <View open={open} setOpen={setOpen} userData={userData} />
+                <Edit editTask={editTask} setEditTask={setEditTask} nameUpdate={nameUpdate} setNameUpdate={setNameUpdate} userData={userData} setUserData={setUserData} setList={props.setList} list={props.list} />
+                <Delete del={del} setDel={setDel} setList={props.setList} list={props.list} userData={userData} />
             </Grid>
-            <View open={open} setOpen={setOpen} userData={userData} />
-            <Edit editTask={editTask} setEditTask={setEditTask} nameUpdate={nameUpdate} setNameUpdate={setNameUpdate} userData={userData} setUserData={setUserData} setList={props.setList} list={props.list} />
-            <Delete del={del} setDel={setDel} setList={props.setList} list={props.list} userData={userData} />
         </Grid>
         
     )
