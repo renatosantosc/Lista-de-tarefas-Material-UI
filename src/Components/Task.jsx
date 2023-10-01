@@ -40,7 +40,7 @@ export default function Task(props){
         <>
         <Grid item xs={12} >
           <Grid container justifyContent={'center'} >
-            <Box sx={{width: '50%'}}>
+            <Box sx={{width: props.toggle >= 535 ? '50%' : '100%', marginTop: '7px', marginBottom: '10px'}}>
               <Collapse in={success}>
                 <Alert onClose={success} severity='success' sx={{width: '90%'}} action={
                   <Button onClick={()=>{ setSuccess(false) }}> X </Button> }>
@@ -101,7 +101,7 @@ export default function Task(props){
                 </Dialog>
             </Grid>
           </Grid>
-          <TaskGrid list={list} setList={setList} />
+          <TaskGrid list={list} setList={setList} toggle={props.toggle} />
         </>
     )
 }
