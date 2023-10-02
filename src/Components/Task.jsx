@@ -1,7 +1,8 @@
 import '@fontsource/roboto/500.css';
-import { Grid, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Alert, Button, Collapse, Box } from '@mui/material'
+import { Grid, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import { useState } from 'react';
 import TaskGrid from './TaskGrid';
+import Save from './Save';
 
 export default function Task(props){
 
@@ -11,6 +12,7 @@ export default function Task(props){
     const [errorTitle, setErrorTitle] = useState(false)
     const [errorTask, setErrorTask] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [description, setDescription] = useState(null)
     const bgs = ['#9f97ca', '#5d5b79', '#e4b6ad', '#e8e1c1', '#98fef9', '#c24862', '#6394ac', '#74a49f', '#cf9889', '#926277', '#785276', '#7897d6',
                  '#43588d', '#0897ff', '#1a657b', '#da5ab6', '#fa57a3', '#716c8b', '#75285b', '#0e4b9b']
    
@@ -29,6 +31,7 @@ export default function Task(props){
           props.setOpen(false)
           setErrorTask(false)
           setSuccess(true)
+          setDescription('Salvo com sucesso!')
         }
         else{ setErrorTask(true) }
       }
@@ -38,18 +41,7 @@ export default function Task(props){
 
     return(
         <>
-        <Grid item xs={12} >
-          <Grid container justifyContent={'center'} >
-            <Box sx={{width: props.toggle >= 535 ? '50%' : '100%', marginTop: '7px', marginBottom: '10px'}}>
-              <Collapse in={success}>
-                <Alert onClose={success} severity='success' sx={{width: '90%'}} action={
-                  <Button onClick={()=>{ setSuccess(false) }}> X </Button> }>
-                  Salvo com sucesso
-                </Alert>
-              </Collapse>
-            </Box>
-          </Grid>
-        </Grid>
+        <Save success={success} setSuccess={setSuccess} width={props.toggle} descrição={description} />
         <Grid item xs={12}>
             <Grid container justifyContent={'center'}>
                 <Dialog open={props.open} onClose={handleClose} sx={{padding: 2}}>
@@ -101,7 +93,7 @@ export default function Task(props){
                 </Dialog>
             </Grid>
           </Grid>
-          <TaskGrid list={list} setList={setList} toggle={props.toggle} />
+          <TaskGrid list={list} setList={setList} toggle={props.toggle} setDescription={setDescription} setSuccess={setSuccess}  />
         </>
     )
 }
