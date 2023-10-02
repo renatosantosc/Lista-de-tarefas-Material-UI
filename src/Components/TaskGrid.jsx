@@ -72,8 +72,8 @@ export default function TaskGrid(props){
                     })}
                 </Grid>
                 <View open={open} setOpen={setOpen} userData={userData} />
-                <Edit editTask={editTask} setEditTask={setEditTask} nameUpdate={nameUpdate} setNameUpdate={setNameUpdate} userData={userData} setUserData={setUserData} setList={props.setList} list={props.list} />
-                <Delete del={del} setDel={setDel} setList={props.setList} list={props.list} userData={userData} />
+                <Edit editTask={editTask} setEditTask={setEditTask} nameUpdate={nameUpdate} setNameUpdate={setNameUpdate} userData={userData} setUserData={setUserData} setList={props.setList} list={props.list} setDescription={props.setDescription} setSuccess={props.setSuccess}  />
+                <Delete del={del} setDel={setDel} setList={props.setList} list={props.list} userData={userData} setDescription={props.setDescription} setSuccess={props.setSuccess}  />
             </Grid>
         </Grid>
         
