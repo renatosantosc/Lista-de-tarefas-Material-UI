@@ -9,6 +9,8 @@ export default function Delete(props){
         })
         props.setList(del)
         props.setDel(false)
+        props.setSuccess(true)
+        props.setDescription('Excluído com sucesso!')
     }
 
     return(
@@ -20,7 +22,7 @@ export default function Delete(props){
                             <DialogTitle textAlign={ 'center' }>Deseja excluir ?</DialogTitle>
                             <Divider />
                             <DialogContent>
-                                <Typography textAlign={'center'} fontWeight={'bold'}>{props.userData.title}</Typography>
+                                <Typography textAlign={'center'} fontWeight={'bold'} fontSize={'1.2rem'}>{props.userData.title}</Typography>
                                 <Typography textAlign={'center'}>{props.userData.name}</Typography>
                             </DialogContent>
                             <DialogActions sx={{marginTop: 2}}>

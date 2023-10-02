@@ -14,6 +14,8 @@ export default function Edit(props){
                 return item.key === props.userData.id ? item.name = props.nameUpdate : item.name
             })
             props.setEditTask(false)
+            props.setSuccess(true)
+        props.setDescription('Atualizado com sucesso!')
         }
     }
     return(
