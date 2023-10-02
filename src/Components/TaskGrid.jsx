@@ -27,7 +27,7 @@ export default function TaskGrid(props){
     return(
         <Grid container>
             <Grid item xs={12} direction={'row'} >
-                <Grid container spacing={2} height={props.toggle <= 535 ? 470 : 490}
+                <Grid container spacing={2} height={props.toggle <= 535 ? 470 : 490} padding={'8px'}
                 sx={{overflowX: 'hidden', overflowY: 'scroll', '&:hover':{'&::-webkit-scrollbar-thumb':{backgroundColor: 'gray'}},
                 '&::-webkit-scrollbar':{width: '5px'}, '&::-webkit-scrollbar-thumb':{backgroundColor: 'transparent', borderRadius: '20px'}, '&::-webkit-scrollbar-track':{backgroundColor: 'trasnparent'}}}>
                     {props.list.map( itemObj =>{
