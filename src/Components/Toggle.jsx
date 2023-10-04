@@ -7,7 +7,7 @@ import { useState, Fragment } from 'react'
 
 export default function Toggle(props){
 
-    const [toggle, setToggle] = useState(false)
+    const [toggle, setToggle] = useState(false) // State que vai abrir o toggle (Menu lateral)
     const toggleDrawer = (anchor, open) => e =>{
         if(e.type === 'Tab'){
             return;
@@ -21,12 +21,15 @@ export default function Toggle(props){
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
         >
-            <List sx={{backgroundColor: props.mode ? '#e2e2e2' : '#262d35', height: '100vh'}}>
+            <List sx={{
+                backgroundColor: props.mode ? '#e2e2e2' : '#262d35', 
+                height: '100vh'
+                }}>
                     <ListItem disablePadding>
-                        <ListItemButton sx={{color: props.mode ? '#262d35' : '#e3eae9'}} onClick={()=>{ props.setMode(!props.mode) }}>
+                        <ListItemButton sx={{ color: props.mode ? '#262d35' : '#e3eae9' }} onClick={()=>{ props.setMode(!props.mode) }}>
                             <ListItemIcon> {props.mode 
-                                ? <DarkModeIcon sx={{color: props.mode ? '#262d35' : '#e3eae9'}}/> 
-                                : <LightModeIcon sx={{color: props.mode ? '#262d35' : '#e3eae9'}}/> } 
+                                ? <DarkModeIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}/> 
+                                : <LightModeIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}/> } 
                             </ListItemIcon>
                             <ListItemText primary={'Dark/Light'} />
                         </ListItemButton>
@@ -34,8 +37,8 @@ export default function Toggle(props){
 
                     <ListItem disablePadding>
                         <Link href='https://github.com/renatosantosc' underline='none' target='_blank' rel='noopener' sx={{width: '100%'}} >
-                            <ListItemButton sx={{color: props.mode ? '#262d35' : '#e3eae9'}}>
-                                <ListItemIcon> <GitHubIcon sx={{color: props.mode ? '#262d35' : '#e3eae9'}} /> </ListItemIcon>
+                            <ListItemButton sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}>
+                                <ListItemIcon> <GitHubIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }} /> </ListItemIcon>
                                 <ListItemText primary={'GitHub'} />
                             </ListItemButton>
                         </Link>
@@ -48,7 +51,9 @@ export default function Toggle(props){
             {['right'].map((anchor) => (
                 <Fragment key={anchor}>
                     <Button onClick={toggleDrawer(anchor, true)}> 
-                        <IconButton sx={{color: props.mode ? '#262d35' : '#e3eae9'}}> <MenuIcon /> </IconButton> 
+                        <IconButton sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}> 
+                            <MenuIcon /> 
+                        </IconButton> 
                     </Button>
                     <Drawer 
                     anchor={anchor}

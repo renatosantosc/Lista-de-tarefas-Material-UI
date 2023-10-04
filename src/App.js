@@ -12,25 +12,22 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
 function App() {
-  const [open, setOpen] = useState(false)
-  const [mode, setMode] = useState(false)
-  const [toggle, setToggle] = useState(window.innerWidth)
-  const handleOpen = () =>{
-    setOpen(true)
-  }
-  const handleMode = () =>{ 
-    setMode(!mode)
-   }
-   const width = () =>{ setToggle(window.innerWidth) }
-   setInterval(width, 1000)
+  const [open, setOpen] = useState(false) // state para abrir o Component Task
+  const [mode, setMode] = useState(false) // state para a troca de modo (Dark/light)
+  const [toggle, setToggle] = useState(window.innerWidth) // state para verificar a largura da tela
+  const handleOpen = () =>{ setOpen(true) } // Função para abrir o Component Task
+  const handleMode = () =>{ setMode(!mode) } // Função para alterar o modo
+  const width = () =>{ setToggle(window.innerWidth) } 
+  setInterval(width, 1000) // A cada 1 segundo o sistema olha a largura da página e atualiza o state (toggle)
 
   return (
     <Box sx={{width: '100vw', heidht: '100vh', backgroundColor: mode ? '#e2e2e2' : '#262d35'}}>
       <Container maxWidth='lg' sx={{backgroundColor: 'transparent', justifyContent: 'center', height: '100vh', overflowY: 'hidden'}}>
         
-        <Box width={'100%'}  >
+        <Box width={'100%'}  > {/* Box responsável pelo header da página */}
           <Paper elevation={10} sx={{backgroundColor: 'transparent', padding: 1}} >
             <Grid container spacing={2} alignItems={'center'}>
+
               <Grid item lg={4} md={4} sm={4} xs={4} >
                 <AssignmentIcon fontSize='large' sx={{color: mode ? '#262d35' : '#e3eae9'}} textAlign={'start'} />
               </Grid>
@@ -38,15 +35,19 @@ function App() {
               <Grid item lg={4} md={4} sm={4} xs={4} textAlign={'center'}>
                 <Typography fontSize={16} fontWeight={'bold'} fontFamily={'verdana'} sx={{color: mode ? '#262d35' : '#e3eae9'}} >Lembre de suas tarefas</Typography>
               </Grid>
+              
               {toggle < 560 ? <Toggle mode={mode} setMode={setMode} /> :
               <Grid item lg={4} md={4} sm={4} xs={4} textAlign={'end'}>
+
                 <Link href='https://github.com/renatosantosc' underline='none' target='_blank' rel='noopener'>
                   <IconButton> <GitHubIcon sx={{color: mode ? '#262d35' : '#e3eae9'}} /> </IconButton>
                 </Link> 
+
                 <IconButton>
                   {mode ? <DarkModeIcon sx={{color: mode ? '#262d35' : '#e3eae9'}} onClick={handleMode}/> 
                   : <LightModeIcon sx={{color: mode ? '#262d35' : '#e3eae9'}} onClick={handleMode} /> } 
                 </IconButton>
+
               </Grid>
               }
             </Grid>

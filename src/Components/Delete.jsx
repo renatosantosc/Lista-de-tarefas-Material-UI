@@ -3,7 +3,7 @@ import { Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button, 
 
 export default function Delete(props){
 
-    const Delete = key =>{
+    const Delete = key =>{ // Função que deleta (filtra) a tarefa selecionada
        const del = props.list.filter ( itemObj =>{
             return itemObj.key !== key
         })
@@ -17,17 +17,18 @@ export default function Delete(props){
         <>
             <Grid container justifyContent={'center'}>
                 <Grid item xs={12}>
-                    <Dialog open={props.del} onClose={()=>{props.setDel(false)}} fullWidth>
-                        <Paper sx={{backgroundColor: props.userData.theme, width: '100%'}}>
+                    <Dialog open={ props.del } onClose={()=>{ props.setDel(false) }} fullWidth>
+                        <Paper sx={{ backgroundColor: props.userData.theme, width: '100%' }}>
                             <DialogTitle textAlign={ 'center' }>Deseja excluir ?</DialogTitle>
                             <Divider />
                             <DialogContent>
                                 <Typography textAlign={'center'} fontWeight={'bold'} fontSize={'1.2rem'}>{props.userData.title}</Typography>
-                                <Typography textAlign={'center'}>{props.userData.name}</Typography>
+                                <Typography textAlign={'center'}>{ props.userData.name }</Typography>
                             </DialogContent>
+
                             <DialogActions sx={{marginTop: 2}}>
-                                <Button variant='contained' onClick={()=>{Delete(props.userData.id)}} color='error'>Excluir</Button>
-                                <Button onClick={()=>{props.setDel(false)}} sx={{color: 'black'}}>Cancelar</Button>
+                                <Button variant='contained' onClick={()=>{Delete( props.userData.id) }} color='error'>Excluir</Button>
+                                <Button onClick={()=>{ props.setDel(false) }} sx={{ color: 'black' }}>Cancelar</Button>
                             </DialogActions>
                         </Paper>
                     </Dialog>

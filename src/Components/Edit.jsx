@@ -9,13 +9,13 @@ export default function Edit(props){
         props.setNameUpdate(e.target.value)
     }
     const Save = () =>{
-        if(props.userData.name.trim().length > 0){
+        if(props.userData.name.trim().length > 0){ // Função que vai modificar o name da tarefa
             props.list.map( item =>{
                 return item.key === props.userData.id ? item.name = props.nameUpdate : item.name
             })
             props.setEditTask(false)
             props.setSuccess(true)
-        props.setDescription('Atualizado com sucesso!')
+            props.setDescription('Atualizado com sucesso!')
         }
     }
     return(
