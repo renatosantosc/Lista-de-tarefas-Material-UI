@@ -2,7 +2,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Grid, Paper,
 import { useState } from 'react'
 
 export default function Edit(props){
-    const [errorTask, setErrorTask] = useState(false)
+    const [errorTask, setErrorTask] = useState(false) // State que vai verificar o input, caso tenha algum erro, irá aparecer uma mesagem
 
     const handleClose = () =>{
         props.setEditTask(false)
@@ -11,8 +11,8 @@ export default function Edit(props){
     const handleChange = e =>{
         props.setNameUpdate(e.target.value)
     }
-    const Save = () =>{
-        if(props.nameUpdate.trim().length > 0){ // Função que vai modificar o name da tarefa
+    const Save = () =>{ // Função que vai modificar o name da tarefa
+        if(props.nameUpdate.trim().length > 0){ 
             props.list.map( item =>{
                 return item.key === props.userData.id ? item.name = props.nameUpdate : item.name
             })
@@ -44,13 +44,12 @@ export default function Edit(props){
                                 onChange={handleChange}
                                 helperText={errorTask ? 'Campo obrigatório' : ''}
                                 error={errorTask}
+                                autoComplete='off'
                                 sx={{
                                     '& label.Mui-focused' : {
-                                        color: 'white'
+                                        color: 'Black'
                                     },
-                                    '& label' : {
-                                        fontWeight: 'bold'
-                                    },
+                                    
                                     '& .MuiInput-underline:after' : {
                                         borderBottomColor: 'white'
                                     },
