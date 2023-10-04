@@ -19,10 +19,9 @@ export default function Delete(props){
                 <Grid item xs={12}>
                     <Dialog open={ props.del } onClose={()=>{ props.setDel(false) }} fullWidth>
                         <Paper sx={{ backgroundColor: props.userData.theme, width: '100%' }}>
-                            <DialogTitle textAlign={ 'center' }>Deseja excluir ?</DialogTitle>
+                            <DialogTitle textAlign={ 'center' }>Deseja excluir: {props.userData.title} ? </DialogTitle>
                             <Divider />
                             <DialogContent>
-                                <Typography textAlign={'center'} fontWeight={'bold'} fontSize={'1.2rem'}>{props.userData.title}</Typography>
                                 <Typography textAlign={'center'}>{ props.userData.name }</Typography>
                             </DialogContent>
 
