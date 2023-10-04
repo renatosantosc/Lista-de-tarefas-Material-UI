@@ -1,21 +1,28 @@
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Grid, Paper, TextField } from '@mui/material'
+import { useState } from 'react'
 
 export default function Edit(props){
+    const [errorTask, setErrorTask] = useState(false)
 
     const handleClose = () =>{
         props.setEditTask(false)
+        setErrorTask(false)
     }
     const handleChange = e =>{
         props.setNameUpdate(e.target.value)
     }
     const Save = () =>{
-        if(props.userData.name.trim().length > 0){ // Função que vai modificar o name da tarefa
+        if(props.nameUpdate.trim().length > 0){ // Função que vai modificar o name da tarefa
             props.list.map( item =>{
                 return item.key === props.userData.id ? item.name = props.nameUpdate : item.name
             })
             props.setEditTask(false)
             props.setSuccess(true)
             props.setDescription('Atualizado com sucesso!')
+            setErrorTask(false)
+        }
+        else{
+            setErrorTask(true)
         }
     }
     return(
@@ -35,6 +42,8 @@ export default function Edit(props){
                                 fullWidth
                                 value={props.nameUpdate}
                                 onChange={handleChange}
+                                helperText={errorTask ? 'Campo obrigatório' : ''}
+                                error={errorTask}
                                 sx={{
                                     '& label.Mui-focused' : {
                                         color: 'white'
