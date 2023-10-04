@@ -8,7 +8,7 @@ export default function Save(props){
            <Grid item xs={12} >
                 <Grid container justifyContent={'center'} >
                     <Box sx={{
-                        width: props.width >= 560 ? '50%' : '100%', 
+                        width: props.width >= 670 ? '50%' : '95%', 
                         marginTop: '7px', 
                         marginBottom:'20px'}}
                     >
