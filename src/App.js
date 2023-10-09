@@ -21,26 +21,45 @@ function App() {
   setInterval(width, 1000) // A cada 1 segundo o sistema olha a largura da página e atualiza o state (toggle)
 
   return (
-    <Box sx={{width: '100vw', heidht: '100vh', backgroundColor: mode ? '#e2e2e2' : '#262d35'}}>
-      <Container maxWidth='lg' sx={{backgroundColor: 'transparent', justifyContent: 'center', height: '100vh', overflowY: 'hidden'}}>
+    <Box sx={{
+      width: '100vw', 
+      heidht: '100vh', 
+      backgroundColor: mode ? '#e2e2e2' : '#262d35'}}>
+
+      <Container maxWidth='lg' 
+      sx={{
+        backgroundColor: 'transparent', 
+        justifyContent: 'center', 
+        height: '100vh', 
+        overflowY: 'hidden'}}>
         
         <Box width={'100%'}  > {/* Box responsável pelo header da página */}
           <Paper elevation={10} sx={{backgroundColor: 'transparent', padding: 1}} >
             <Grid container spacing={2} alignItems={'center'}>
 
               <Grid item lg={4} md={4} sm={4} xs={4} >
-                <AssignmentIcon fontSize='large' sx={{color: mode ? '#262d35' : '#e3eae9'}} textAlign={'start'} />
+                <AssignmentIcon 
+                fontSize='large' 
+                sx={{color: mode ? '#262d35' : '#e3eae9'}} 
+                textAlign={'start'} />
               </Grid>
 
               <Grid item lg={4} md={4} sm={4} xs={4} textAlign={'center'}>
-                <Typography fontSize={16} fontWeight={'bold'} fontFamily={'verdana'} sx={{color: mode ? '#262d35' : '#e3eae9'}} >Lembre de suas tarefas</Typography>
+                <Typography 
+                  fontSize={16} 
+                  fontWeight={'bold'} 
+                  fontFamily={'verdana'} 
+                  sx={{color: mode ? '#262d35' : '#e3eae9'}} 
+                  >Lembre de suas tarefas</Typography>
               </Grid>
               
               {toggle < 560 ? <Toggle mode={mode} setMode={setMode} /> :
               <Grid item lg={4} md={4} sm={4} xs={4} textAlign={'end'}>
 
                 <Link href='https://github.com/renatosantosc' underline='none' target='_blank' rel='noopener'>
-                  <IconButton> <GitHubIcon sx={{color: mode ? '#262d35' : '#e3eae9'}} /> </IconButton>
+                  <IconButton> 
+                    <GitHubIcon sx={{color: mode ? '#262d35' : '#e3eae9'}} /> 
+                  </IconButton>
                 </Link> 
 
                 <IconButton>
@@ -77,5 +96,4 @@ function App() {
     </ Box>
   );
 }
-
 export default App;
