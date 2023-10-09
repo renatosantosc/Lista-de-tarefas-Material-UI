@@ -48,6 +48,17 @@ function App() {
                   : <LightModeIcon sx={{color: mode ? '#262d35' : '#e3eae9'}} onClick={handleMode} /> } 
                 </IconButton>
 
+                <Link href='https://icons8.com' underline='none' target='_blank' rel='noopener'>
+                  <Button 
+                  sx={{
+                    borderRadius: '10px',
+                    backgroundColor: mode ? '#262d35' : '#e3eae9',
+                    color: mode ? '#e3eae9' : '#262d35',
+                    '&:hover':{color: mode ? '#262d35' : '#e3eae9'}
+                  }}
+                  >Icons8</Button>
+                </Link>
+
               </Grid>
               }
             </Grid>
