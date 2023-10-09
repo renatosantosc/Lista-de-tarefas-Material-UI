@@ -6,8 +6,8 @@ import Save from './Save';
 
 export default function Task(props){
 
-    const [task,  setTask] = useState(null) // State responsável pelo input da tarefa
-    const [title, setTitle] = useState(null) // State responsável pelo input do título
+    const [task,  setTask] = useState('') // State responsável pelo input da tarefa
+    const [title, setTitle] = useState('') // State responsável pelo input do título
     const [list, setList] = useState([]) // State do array das tarefas
     const [errorTitle, setErrorTitle] = useState(false) // State de erro do helperText do input do título
     const [errorTask, setErrorTask] = useState(false) // State de erro do helperText do input da tarefa
@@ -37,7 +37,11 @@ export default function Task(props){
       }
       else{ setErrorTitle(true) }
     }
-    const handleClose = () =>{ props.setOpen(false) }
+    const handleClose = () =>{ 
+      props.setOpen(false)
+      setErrorTask(false)
+      setErrorTitle(false)
+     }
 
     return(
         <>
