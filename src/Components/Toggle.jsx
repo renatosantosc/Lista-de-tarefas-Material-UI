@@ -16,7 +16,7 @@ export default function Toggle(props){
     };
     const list = (anchor) =>(
         <Box
-        sx={{ width: 250}}
+        sx={{ width: 250, overflow: 'hidden'}}
         role='presentation'
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
@@ -25,24 +25,39 @@ export default function Toggle(props){
                 backgroundColor: props.mode ? '#e2e2e2' : '#262d35', 
                 height: '100vh'
                 }}>
-                    <ListItem disablePadding>
-                        <ListItemButton sx={{ color: props.mode ? '#262d35' : '#e3eae9' }} onClick={()=>{ props.setMode(!props.mode) }}>
-                            <ListItemIcon> {props.mode 
-                                ? <DarkModeIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}/> 
-                                : <LightModeIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}/> } 
-                            </ListItemIcon>
-                            <ListItemText primary={'Dark/Light'} />
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem disablePadding>
-                        <Link href='https://github.com/renatosantosc' underline='none' target='_blank' rel='noopener' sx={{width: '100%'}} >
-                            <ListItemButton sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}>
-                                <ListItemIcon> <GitHubIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }} /> </ListItemIcon>
-                                <ListItemText primary={'GitHub'} />
+                <Grid container direction={'column'} sx={{height: '100%'}}>
+                    <Grid item xs={11}>
+                        <ListItem disablePadding>
+                            <ListItemButton sx={{ color: props.mode ? '#262d35' : '#e3eae9' }} onClick={()=>{ props.setMode(!props.mode) }}>
+                                <ListItemIcon> {props.mode 
+                                    ? <DarkModeIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}/> 
+                                    : <LightModeIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}/> } 
+                                </ListItemIcon>
+                                <ListItemText primary={'Dark/Light'} />
                             </ListItemButton>
-                        </Link>
-                    </ListItem>
+                        </ListItem>
+
+                        <ListItem disablePadding>
+                            <Link href='https://github.com/renatosantosc' underline='none' target='_blank' rel='noopener' sx={{width: '100%'}} >
+                                <ListItemButton sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}>
+                                    <ListItemIcon> <GitHubIcon sx={{ color: props.mode ? '#262d35' : '#e3eae9' }} /> </ListItemIcon>
+                                    <ListItemText primary={'GitHub'} />
+                                </ListItemButton>
+                            </Link>
+                        </ListItem>
+                    </Grid>
+                    
+                    <Grid item xs={1}>
+                        <ListItem disablePadding>
+                            <Link href='https://icons8.com' underline='none' target='_blank' rel='noopener' sx={{width: '100%'}} >
+                                <ListItemButton sx={{ color: props.mode ? '#262d35' : '#e3eae9' }}>
+                                <ListItemIcon></ListItemIcon>
+                                    <ListItemText primary={'Icons by Icons8'} />
+                                </ListItemButton>
+                            </Link>
+                        </ListItem>
+                    </Grid>
+                </Grid>
             </List>
         </Box>
     )
